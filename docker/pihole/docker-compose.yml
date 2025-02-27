@@ -1,0 +1,29 @@
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    networks:
+      - pihole
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    volumes:
+      - "./etc/pihole:/etc/pihole"
+      - "./etc/dnsmasq.d:/etc/dnsmasq.d"
+    environment:
+      FTLCONF_dns_listeningMode: SINGLE
+      FTLCONF_dns_interface: eth0
+      FTLCONF_webserver_api_password: '${PASSWORD}'
+      FTLCONF_dns_upstreams: '1.1.1.1;1.0.0.1'
+      TZ: 'Europe/Amsterdam'
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pihole.entrypoints=websecure"
+      - "traefik.http.routers.pihole.rule=Host(`docker-2.jook.network`)"
+      - "traefik.http.routers.pihole.tls=true"
+      - "traefik.http.services.pihole.loadbalancer.server.port=80"
+    restart: unless-stopped
+
+networks:
+  pihole:
+    external: true
