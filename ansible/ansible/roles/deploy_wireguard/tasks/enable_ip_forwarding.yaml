@@ -1,0 +1,7 @@
+---
+- name: enable ip forwarding
+  ansible.posix.sysctl:
+    name: '{{ item.key }}'
+    value:  '{{ item.value }}'
+    sysctl_set: yes
+  with_dict: '{{ sysctl_config }}'

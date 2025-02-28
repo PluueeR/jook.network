@@ -1,0 +1,9 @@
+---
+- name: disable ipv6
+  include_tasks: disable_ipv6.yaml
+
+- name: setup nftables
+  include_tasks: setup_nftables.yaml
+
+- name: upgrade debian
+  include_tasks: upgrade_debian.yaml

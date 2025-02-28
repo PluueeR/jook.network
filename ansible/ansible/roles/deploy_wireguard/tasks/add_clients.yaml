@@ -1,0 +1,69 @@
+---
+- name: create a directory under /etc/wireguard/clients for each client
+  ansible.builtin.file:
+    path: /etc/wireguard/clients/{{ client.key }}
+    state: directory
+    owner: root
+    group: root
+    mode: '0700'
+
+- name: generate key pair
+  ansible.builtin.shell:
+    cmd: umask 077 && wg genkey | tee private_key | wg pubkey > public_key
+    chdir: /etc/wireguard/clients/{{ client.key }}
+    creates: /etc/wireguard/clients/{{ client.key }}/public_key
+
+- name: generate pre shared key
+  ansible.builtin.shell:
+    cmd: umask 077 && wg genpsk | tee preshared_key 
+    chdir: /etc/wireguard/clients/{{ client.key }}
+    creates: /etc/wireguard/clients/{{ client.key }}/preshared_key
+
+- name: get client private key
+  ansible.builtin.shell:
+    cmd: cat /etc/wireguard/clients/{{ client.key }}/private_key
+  register: client_private_key
+  changed_when: false
+
+- name: get client public key
+  ansible.builtin.shell:
+    cmd: cat /etc/wireguard/clients/{{ client.key }}/public_key
+  register: client_public_key
+  changed_when: false
+
+- name: get preshared key
+  ansible.builtin.shell:
+    cmd: cat /etc/wireguard/clients/{{ client.key }}/preshared_key
+  register: preshared_key
+  changed_when: false
+
+- name: set client private key fact
+  ansible.builtin.set_fact:
+    client_private_key: "{{ client_private_key.stdout }}"
+
+- name: set client key fact
+  ansible.builtin.set_fact:
+    client_public_key: "{{ client_public_key.stdout }}"
+
+- name: set preshared_key fact
+  ansible.builtin.set_fact:
+    preshared_key: "{{ preshared_key.stdout }}"
+
+- name: client.conf
+  ansible.builtin.template:
+    src: client.conf.j2
+    dest: /etc/wireguard/clients/{{ client.key }}/client.conf
+    owner: root
+    group: root
+    mode: '0600'
+
+- name: add peer to wg0.conf
+  ansible.builtin.blockinfile:
+    path: /etc/wireguard/wg0.conf
+    block: |
+      [Peer]
+      PublicKey = {{ client_public_key }}
+      PresharedKey = {{ preshared_key }}
+      AllowedIPs = {{ client.value.address }}
+    marker: "# {mark} client: {{ client.key }}"
+    prepend_newline: true

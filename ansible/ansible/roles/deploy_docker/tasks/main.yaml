@@ -1,0 +1,53 @@
+---
+- name: install prerequisites
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - ca-certificates
+    - curl
+
+- name: add docker GPG key 
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+
+- name: add docker repository
+  ansible.builtin.apt_repository:
+    repo: "{{ docker_apt_repository }}"
+    state: present
+
+- name: install docker
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  loop:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+    - docker-buildx-plugin
+    - docker-compose-plugin
+
+- name: create directory for docker containers
+  ansible.builtin.file:
+    path: /srv/docker/containers
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+    
+- name: check if docker is enabled and running
+  ansible.builtin.systemd:
+    name: docker
+    enabled: true
+    state: started
+
+- name: setup backup
+  include_tasks: setup_backup.yaml
+
+- name: reboot
+  ansible.builtin.reboot:
+    msg: "Reboot initiated by Ansible"
+    connect_timeout: 5
+    post_reboot_delay: 30

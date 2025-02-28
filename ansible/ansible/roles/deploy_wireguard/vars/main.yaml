@@ -1,0 +1,13 @@
+---
+wireguard:
+  address: 192.168.40.1/24
+  clients:
+    ipad:
+      address: 192.168.40.2/32
+    iphone:
+      address: 192.168.40.3/32
+  dns: 192.168.10.11, 192.168.10.12
+  endpoint: vpn.jook.network:51820
+address: 192.168.40.1/24
+sysctl_config:
+  net.ipv4.ip_forward: 1

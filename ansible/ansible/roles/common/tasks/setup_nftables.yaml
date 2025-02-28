@@ -1,0 +1,13 @@
+---
+- name: copy nftables.conf
+  ansible.builtin.copy:
+    src: nftables_{{ inventory_hostname }}.conf
+    dest: /etc/nftables.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: check if nftables service is enabled and running
+  ansible.builtin.systemd:
+    name: nftables
+    enabled: true

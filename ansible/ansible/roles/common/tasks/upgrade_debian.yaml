@@ -1,0 +1,24 @@
+---
+- name: update apt-get repo and upgrade all packages
+  ansible.builtin.apt:
+    update_cache: true
+    upgrade: dist
+    cache_valid_time: 3600
+
+- name: check if reboot is needed
+  register: reboot_required_file
+  ansible.builtin.stat:
+    path: /var/run/reboot-required
+    get_checksum: true
+  changed_when: reboot_required_file.stat.exists
+  notify: reboot
+  when: inventory_hostname != "ansible-1.jook.network"
+
+- name: check if reboot is needed on ansible host
+  register: reboot_required_file
+  ansible.builtin.stat:
+    path: /var/run/reboot-required
+    get_checksum: true
+  changed_when: reboot_required_file.stat.exists
+  notify: reboot required
+  when: inventory_hostname == "ansible-1.jook.network"

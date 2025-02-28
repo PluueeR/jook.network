@@ -1,0 +1,7 @@
+---
+- name: docker-#.jook.network
+  hosts: docker
+  become: true
+  roles:
+    - common
+    - deploy_docker

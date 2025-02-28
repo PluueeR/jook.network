@@ -1,0 +1,7 @@
+---
+- name: wireguard.jook.network
+  hosts: wireguard
+  become: true
+  roles:
+    - common
+    - deploy_wireguard 

@@ -1,0 +1,12 @@
+---
+- name: reboot
+  ansible.builtin.reboot:
+    msg: "Reboot initiated by Ansible."
+    connect_timeout: 5
+    post_reboot_delay: 30
+  when: reboot_required_file.stat.exists
+
+- name: reboot required
+  ansible.builtin.debug:
+    msg: A reboot is required on Ansible host ansible-1.jook.network.
+  when: reboot_required_file.stat.exists

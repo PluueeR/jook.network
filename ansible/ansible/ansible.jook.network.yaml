@@ -1,0 +1,6 @@
+---
+- name: ansible.jook.network
+  hosts: ansible
+  become: true
+  roles:
+    - common

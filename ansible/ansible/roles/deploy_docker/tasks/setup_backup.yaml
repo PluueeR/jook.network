@@ -1,0 +1,24 @@
+---
+- name: create directory for Docker backups
+  ansible.builtin.file:
+    path: /srv/docker/backups
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: copy backup.sh
+  ansible.builtin.copy:
+    src: backup.sh
+    dest: /srv/docker/backups
+    owner: root
+    group: root
+    mode: '0744'
+
+- name: create cron job
+  ansible.builtin.cron:
+    name: "Backup"
+    minute: 0
+    hour: 4
+    weekday: 0
+    job: "/srv/docker/backups/backup.sh"

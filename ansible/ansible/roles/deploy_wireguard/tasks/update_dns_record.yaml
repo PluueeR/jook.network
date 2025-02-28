@@ -1,0 +1,16 @@
+---
+- name: copy update_dns_record.sh
+  ansible.builtin.copy:
+    src: update_dns_record.sh
+    dest: /root
+    owner: root
+    group: root
+    mode: '0700'
+
+- name: create cron job
+  ansible.builtin.cron:
+    name: "Update DNS record"
+    minute: "10,20,30,40,50"
+    hour: "*"
+    weekday: "*"
+    job: "~/update_dns_record.sh"

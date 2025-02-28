@@ -1,0 +1,25 @@
+---
+ansible:
+  hosts:
+    ansible.jook.network:
+  vars:
+    ansible_user: 'jorank'
+    ansbile_become: true
+    ansible_become_method: sudo
+
+docker:
+  hosts:
+    docker-1.jook.network:
+    docker-2.jook.network:
+  vars:
+      ansible_user: 'jorank'
+      ansible_become: true
+      ansible_become_method: sudo
+
+wireguard:
+  hosts:
+    wireguard.jook.network:
+  vars:
+    ansible_user: 'jorank'
+    ansbile_become: true
+    ansible_become_method: sudo
