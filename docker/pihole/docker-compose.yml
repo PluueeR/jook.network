@@ -12,10 +12,10 @@ services:
       - "./etc/dnsmasq.d:/etc/dnsmasq.d"
     environment:
       FTLCONF_dns_listeningMode: SINGLE
-      FTLCONF_dns_interface: eth0
-      FTLCONF_dns_upstreams: '1.1.1.1;1.0.0.1'
+      FTLCONF_dns_interface: <your_interface_here>
+      FTLCONF_dns_upstreams: '<your_upstream_dns_1_here>;<your_upstream_dns_2_here>'
       FTLCONF_webserver_api_password: '${PASSWORD}'
-      TZ: 'Europe/Amsterdam'
+      TZ: '<your_timezone_here>'
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.pihole.entrypoints=websecure"
