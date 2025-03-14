@@ -10,7 +10,9 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
 pip install foobar
 ```
 
-## Usage
+## Trusted proxies 
+
+In order to allow nginx to set the X-Forwarded-For header you need to add the following lines to configuration.yaml:
 
 ```yaml
 http:
