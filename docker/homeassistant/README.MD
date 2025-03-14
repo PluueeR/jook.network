@@ -1,8 +1,6 @@
 # Home Assistant with SSL using nginx as reverse proxy
 
-## Installation
-
-You can use the docker-compose.yml file to deploy Home Assistant in Docker. Home Assistant requires network mode to be set to host for device discovery to work properly.
+You can use the ``docker-compose.yml`` file to deploy Home Assistant in Docker. Home Assistant requires network mode to be set to host for device discovery to work properly.
 
 ## Trusted proxies 
 
