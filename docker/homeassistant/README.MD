@@ -2,11 +2,7 @@
 
 ## Installation
 
-Copy the below docker compose example and update as needed:
-
-```bash
-pip install foobar
-```
+You can use the docker-compose.yml file to deploy Home Assistant in Docker. Home Assistant requires network mode to be set to host for device discovery to work properly.
 
 ## Trusted proxies 
 
