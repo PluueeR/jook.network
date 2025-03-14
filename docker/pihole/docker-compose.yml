@@ -26,4 +26,4 @@ services:
 
 networks:
   pihole:
-    external: true
+    driver: bridge
