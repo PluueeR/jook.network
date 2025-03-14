@@ -7,7 +7,6 @@ services:
       - ./etc/nginx/certs:/etc/nginx/certs
     networks:
       - nginx
-      - pihole
     ports:
       - 80:80
       - 443:443
