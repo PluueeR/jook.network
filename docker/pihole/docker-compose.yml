@@ -8,7 +8,8 @@ services:
     networks:
       - pihole
     ports:
-      - 53:53
+      - 53:53/tcp
+      - 53:53/udp
     environment:
       FTLCONF_dns_listeningMode: SINGLE
       FTLCONF_dns_interface: <your_interface_here>
