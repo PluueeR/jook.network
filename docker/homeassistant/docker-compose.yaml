@@ -1,11 +1,11 @@
 services:
   homeassistant:
-    container_name: "homeassistant"
-    image: "ghcr.io/home-assistant/home-assistant:stable"
+    container_name: homeassistant
+    image: ghcr.io/home-assistant/home-assistant:stable
     volumes:
-      - "./config:/config"
-      - "./media:/media"
-      - "/etc/localtime:/etc/localtime:ro"
-      - "/run/dbus:/run/dbus:ro"
-    network_mode: "host"
-    restart: "unless-stopped"
+      - ./config:/config
+      - ./media:/media
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+    network_mode: host
+    restart: unless-stopped
