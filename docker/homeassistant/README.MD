@@ -1,6 +1,6 @@
-# Foobar
+# Home Assistant with SSL using nginx as reverse proxy
 
-Foobar is a Python library for dealing with word pluralization.
+Hom
 
 ## Installation
 
