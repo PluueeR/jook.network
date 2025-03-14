@@ -4,7 +4,7 @@ You can use the ``docker-compose.yml`` file to deploy Home Assistant in Docker. 
 
 ## Trusted proxies 
 
-In order to allow nginx to set the X-Forwarded-For header you need to add the following lines to configuration.yaml:
+When using SSL/TLS, you need to allow Nginx to set the X-Forwarded-For header. Therefore, you need to add the following lines to ``configuration.yaml``:
 
 ```yaml
 http:
