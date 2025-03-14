@@ -1,12 +1,13 @@
 services:
   nginx:
-    container_name: nginx
-    image: nginx:latest
+    container_name: "nginx"
+    image: "nginx:latest"
     volumes:
       - "./etc/nginx/conf.d:/etc/nginx/conf.d"
       - "./etc/nginx/certs:/etc/nginx/certs"
     networks:
       - "nginx"
+      - "pihole"
     ports:
       - "80:80"
       - "443:443"
@@ -14,4 +15,4 @@ services:
 
 networks:
   nginx:
-    external: true
+    external: "true"
