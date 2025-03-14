@@ -10,5 +10,6 @@ When using SSL/TLS, you need to allow Nginx to set the X-Forwarded-For header. T
 http:
   use_x_forwarded_for: true
   trusted_proxies:
-    - 172.18.0.0/16
+    - <your_subnet_here>
 ```
+Note: As I am using Nginx in a container with a custom bridge network, I have inserted the subnet of this bridge network, which can be found using ``docker network inspect <your_network>``.
