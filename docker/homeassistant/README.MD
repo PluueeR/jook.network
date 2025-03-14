@@ -12,4 +12,4 @@ http:
   trusted_proxies:
     - <your_subnet_here>
 ```
-Note: As I am using Nginx in a container with a custom bridge network, I have inserted the subnet of this bridge network, which can be found using ``docker network inspect <your_network>``.
+Note: Nginx is running in a container with a custom bridge network. You need to insert the subnet of this bridge network, which can be found using ``docker network inspect <your_network>``.
