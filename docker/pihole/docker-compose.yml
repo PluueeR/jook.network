@@ -13,8 +13,8 @@ services:
     environment:
       FTLCONF_dns_listeningMode: SINGLE
       FTLCONF_dns_interface: eth0
-      FTLCONF_webserver_api_password: '${PASSWORD}'
       FTLCONF_dns_upstreams: '1.1.1.1;1.0.0.1'
+      FTLCONF_webserver_api_password: '${PASSWORD}'
       TZ: 'Europe/Amsterdam'
     labels:
       - "traefik.enable=true"
