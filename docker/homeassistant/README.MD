@@ -1,10 +1,8 @@
 # Home Assistant with SSL using nginx as reverse proxy
 
-Hom
-
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Copy the below docker compose example and update as needed:
 
 ```bash
 pip install foobar
