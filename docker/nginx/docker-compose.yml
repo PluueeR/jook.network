@@ -7,6 +7,11 @@ services:
       - ./etc/nginx/certs:/etc/nginx/certs
     networks:
       - nginx
+      - heimdall
+      - pihole
+      - portainer
+      - uptime-kuma
+      - vaultwarden
     ports:
       - 80:80
       - 443:443
@@ -15,7 +20,13 @@ services:
 networks:
   nginx:
     external: true
+  heimdall:
+    external: true
   pihole:
+    external: true
+  portainer:
+    external: true
+  uptime-kuma:
     external: true
   vaultwarden:
     external: true
