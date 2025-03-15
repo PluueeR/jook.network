@@ -15,3 +15,7 @@ services:
 networks:
   nginx:
     external: true
+  pihole:
+    external: true
+  vaultwarden:
+    external: true
