@@ -3,7 +3,7 @@ services:
     container_name: vaultwarden
     image: vaultwarden/server:latest
     volumes:
-      - ./data/:/data
+      - ./data:/data
     networks:
       - vaultwarden
     restart: unless-stopped
